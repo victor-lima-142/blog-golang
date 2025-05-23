@@ -12,15 +12,15 @@ type ArticleService interface {
 
 type articleService struct {
 	Service[models.Article]
-	articleRepository repositories.ArticleRepository
+	repo repositories.ArticleRepository
 }
 
 // NewArticleService creates a new instance of ArticleService.
 // Parameters:
-// - articleRepository: the repository used to access article data.
+// - repo: the repository used to access article data.
 // Returns an implementation of the ArticleService interface.
-func NewArticleService(articleRepository repositories.ArticleRepository) ArticleService {
-	return &articleService{NewService(articleRepository), articleRepository}
+func NewArticleService(repo repositories.ArticleRepository) ArticleService {
+	return &articleService{NewService(repo), repo}
 }
 
 // FindByAuthorID returns a list of articles by a given author's ID.
@@ -28,5 +28,5 @@ func NewArticleService(articleRepository repositories.ArticleRepository) Article
 // - id: the ID of the author.
 // Returns a list of articles and an error if any occurs during the retrieval.
 func (s *articleService) FindByAuthorID(id int64) ([]models.Article, error) {
-	return s.articleRepository.FindByAuthorID(id)
+	return s.repo.FindByAuthorID(id)
 }

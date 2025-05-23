@@ -5,9 +5,9 @@ import (
 )
 
 type BaseController interface {
-	FindByID(c *gin.Context)
-	FindAll(c *gin.Context)
-	Delete(c *gin.Context)
-	Update(c *gin.Context)
-	Create(c *gin.Context)
+	FindByID(ctx *gin.Context)
+	FindAll(ctx *gin.Context)
+	Delete(ctx *gin.Context)
+	Update(ctx *gin.Context)
+	Create(ctx *gin.Context)
 }

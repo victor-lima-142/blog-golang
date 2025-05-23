@@ -8,12 +8,12 @@ import (
 
 type User struct {
 	gorm.Model
-	ID        int64  `gorm:"primaryKey"`
-	Email     string `gorm:"uniqueIndex;not null"`
-	Password  string `gorm:"not null"`
-	Username  string `gorm:"uniqueIndex;not null"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID        int64          `gorm:"primaryKey"`
+	Email     string         `gorm:"uniqueIndex;not null"`
+	Password  string         `gorm:"not null"`
+	Username  string         `gorm:"uniqueIndex;not null"`
+	CreatedAt time.Time      `gorm:"index"`
+	UpdatedAt time.Time      `gorm:"index"`
 	DeletedAt gorm.DeletedAt `gorm:"index"`
 	Profile   *Profile       `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 	Following []*User        `gorm:"many2many:user_followings;joinForeignKey:FollowerID;joinReferences:FollowingID"`

@@ -10,47 +10,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"gorm.io/gorm"
 )
 
-func RunSeedUser() {
-	// db, err := db.GetConnection()
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	// userSeeder := seeders.NewUserSeeder(db)
-
-	// count := 100
-	// _, err = userSeeder.Seed(&count)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Println("Seeded", count, "users")
-}
-
-func RunSeedArticle() {
-	// db, err := db.GetConnection()
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	// articleSeeder := seeders.NewArticleSeeder(db)
-
-	// count := 100
-	// _, err = articleSeeder.Seed(&count)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Println("Seeded", count, "articles")
-}
-
-func main() {
-	db, err := db.GetConnection()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = godotenv.Load()
+func runApp(db *gorm.DB) {
+	err := godotenv.Load()
 
 	if err != nil {
 		log.Fatalf("Error loading .env file")
@@ -71,4 +35,12 @@ func main() {
 
 	fmt.Println(runningMsg)
 	log.Fatal(http.ListenAndServe(portStr, router))
+}
+func main() {
+	// gormDB, err := gormDB.GetConnection()
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	db.RunSeed()
+	// runApp(db)
 }

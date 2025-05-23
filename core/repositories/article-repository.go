@@ -32,7 +32,7 @@ func NewArticleRepository(db *gorm.DB) ArticleRepository {
 // Parameters:
 // - id: the ID of the author.
 // Returns a list of articles and an error if any occurs during the retrieval.
-func (r *articleRepository) FindByAuthorID(id int64) ([]models.Article, error) {
+func (repo *articleRepository) FindByAuthorID(id int64) ([]models.Article, error) {
 	var articles []models.Article
-	return articles, r.db.Preload("Author").Where("author_id = ?", id).Find(&articles).Error
+	return articles, repo.db.Preload("Author").Where("author_id = ?", id).Find(&articles).Error
 }

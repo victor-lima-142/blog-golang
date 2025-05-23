@@ -37,7 +37,7 @@ func getPassword() string {
 	return hashedPassword
 }
 
-func (userSeeder *userSeeder) Seed(ct *int) ([]models.User, error) {
+func (seeder *userSeeder) Seed(ct *int) ([]models.User, error) {
 	var count int
 
 	if ct == nil || *ct == 0 {
@@ -72,8 +72,8 @@ func (userSeeder *userSeeder) Seed(ct *int) ([]models.User, error) {
 		usersToCreate[i].Profile = &profilesToCreate[i]
 	}
 
-	usersResult := userSeeder.db.CreateInBatches(usersToCreate, 100)
-	profilesResult := userSeeder.db.CreateInBatches(profilesToCreate, 100)
+	usersResult := seeder.db.CreateInBatches(usersToCreate, 100)
+	profilesResult := seeder.db.CreateInBatches(profilesToCreate, 100)
 	if usersResult.Error != nil {
 		errStr := usersResult.Error.Error()
 		errFormatted := fmt.Sprintf("failed to seed users: %s", errStr)
